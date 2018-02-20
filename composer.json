@@ -1,0 +1,14 @@
+{
+    "name": "futureactivities/magento2-customerorders",
+    "description": "Adds ability to get a customers previous orders through the REST API.",
+    "version": "1.0.0",
+    "type": "magento2-module",
+    "require": {
+    },
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+          "FutureActivities\\CustomerOrders\\": ""
+        }
+    }
+}
