@@ -4,10 +4,12 @@ namespace FutureActivities\CustomerOrders\Model;
 class OrdersManagement implements \FutureActivities\CustomerOrders\Api\OrdersManagementInterface
 {
     protected $orderCollectionFactory;
+    protected $orderRepository;
     
-    public function __construct(\Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory)
+    public function __construct(\Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory, \Magento\Sales\Api\OrderRepositoryInterface $orderRepository)
     {
         $this->orderCollectionFactory = $orderCollectionFactory;
+        $this->orderRepository = $orderRepository;
     }
        
     /**
@@ -24,5 +26,20 @@ class OrdersManagement implements \FutureActivities\CustomerOrders\Api\OrdersMan
             $result[] = $order;
         
         return $result;
+    }
+    
+    /**
+    * {@inheritdoc}
+    */
+    public function getOrderAddresses($customerId, $orderId)
+    {
+        $order = $this->orderRepository->get($orderId);
+        if ($order->getCustomerId() != $customerId)
+            return;
+            
+        return [
+            $order->getShippingAddress(),
+            $order->getBillingAddress()
+        ];
     }
 }
