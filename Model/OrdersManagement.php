@@ -36,10 +36,7 @@ class OrdersManagement implements \FutureActivities\CustomerOrders\Api\OrdersMan
         $order = $this->orderRepository->get($orderId);
         if ($order->getCustomerId() != $customerId)
             return;
-            
-        return [
-            $order->getShippingAddress(),
-            $order->getBillingAddress()
-        ];
+        
+        return $order->getAddresses();
     }
 }

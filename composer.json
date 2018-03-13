@@ -1,7 +1,7 @@
 {
     "name": "futureactivities/magento2-customerorders",
     "description": "Adds ability to get a customers previous orders through the REST API.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "type": "magento2-module",
     "require": {
     },
